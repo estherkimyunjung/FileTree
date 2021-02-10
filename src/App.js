@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 function App() {
   return (
   <div>
+    <Search name=''/>
     <Folder name="Desktop" isOpen={false}>
       <Folder name="Music">
         <File name="all_star.mp4"/>
@@ -17,6 +18,17 @@ function App() {
   );
 }
 
+const Search = (props) => {
+  console.log(props)
+  return (
+    <div className="ui search">
+      <div className="ui icon input">
+        <input className="propmpt" onChange={props.onChange}/>
+        <i className="search icon"/>
+      </div>
+    </div>
+  )
+};
 
 const Folder = (props) => {
   const [isOpen, setIsOpen] = useState(true);
@@ -27,7 +39,8 @@ const Folder = (props) => {
     setIsOpen(!isOpen)
   }
 
-  return <div>
+  return (
+    <div>
       <span onClick={handleClick}>
         <i className="blue folder icon"/>
         <i className={`caret ${direction} icon`}/>
@@ -37,7 +50,10 @@ const Folder = (props) => {
         {isOpen ? children : null}
       </div>
     </div>
+  )
 };
+
+
 const File = (props) => {
   const {name} = props;
   const fileExteions = name.split('.')[1];
@@ -46,10 +62,12 @@ const File = (props) => {
     jpeg: 'file image',
     png: 'file image outline',
   }
-  return <div>
+  return (
+    <div>
       <i className={`${fileIcons[fileExteions]} icon`}/>
       {name}
     </div>
+  )
 };
 
 export default App;
